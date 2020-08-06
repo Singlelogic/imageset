@@ -1,0 +1,9 @@
+img.image{
+    max-width: 50%;
+    height: auto;
+    display: block;
+}
+
+.content{
+    padding: 10px;
+}

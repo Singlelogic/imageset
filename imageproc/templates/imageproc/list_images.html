@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block content %}
+        <h1>Список изображений</h1>
+
+        {% if obj %}
+            {% for image in obj %}
+                <p><a href="{% url 'image_detail_url' image.slug %}">
+                    {{ image }}
+                </a></p>
+            {% endfor %}
+        {% else %}
+            <p>Нет доступных изображений</p>
+        {% endif %}
+
+        <a href="{% url 'insert_image' %}">Добавить изображение</a>
+    {% endblock %}
+</body>
+</html>

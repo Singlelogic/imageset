@@ -1,0 +1,28 @@
+{% extends 'imageproc/base.html' %}
+
+{% block content %}
+    <a href="{% url 'list_images' %}">Назад к списку</a>
+    <p>{{ image }}</p>
+    Текущие размеры: {{ image.image.width }} x {{ image.image.height }}
+
+    <form action="." method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="form-group">
+            {% if field.errors %}
+            <div class="alert alert-danger">
+                {{ field.errors }}
+            </div>
+            {% endif %}
+
+            {{ field.label }}
+            {{ field }}
+        </div>
+        {% endfor %}
+        <p><button type="submit" class="btn btn-primary">Отправить</button></p>
+    </form>
+
+
+    <p><img class="image" src="{{ image.image.url }}"></p>
+    <a href="{{ image.get_delete_url }}" class="btn btn-danger delete">Удалить</a>
+{% endblock %}

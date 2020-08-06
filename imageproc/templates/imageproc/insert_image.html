@@ -1,0 +1,35 @@
+{% extends 'imageproc/base.html' %}
+
+{% block content %}
+    <a href="{% url 'list_images' %}">Назад к списку</a>
+    <h1>Новое изображение</h1>
+
+    <form action="{% url 'insert_image' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">
+                {{ message|safe }}
+                <a href="{% url 'insert_image' %}" class="close">✖</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% for field in form %}
+            <div class="form-group">
+                {% if field.errors %}
+                    <div class="alert alert-danger">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+
+                {{ field.label }}
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Отправить</button>
+     </form>
+{% endblock %}
